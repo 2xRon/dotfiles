@@ -1,0 +1,437 @@
+###  _ _____ 
+### (_)___ / 
+### | | |_ \ 
+### | |___) |
+### |_|____/ 
+###          
+
+# Sections:
+#       -> Basic Configuration
+#       -> Startup
+#       -> Basic Bindings
+#       -> Letter Key Bindings
+#       -> Arrow Keys
+#       -> Function Buttons
+#       -> Media Keys
+#       -> Workspace Control
+#       -> Modes
+#       -> Colors
+#       -> Special Window Rules
+#       -> Dropdown Windows
+
+################################################################################
+# => Basic Configuration
+################################################################################
+# font
+font pango:Inconsolata 8
+set $mod Mod4
+for_window [class="^.*"] border pixel 3
+gaps inner 10
+gaps outer 1
+set $term exec --no-startup-id urxvt
+
+# i3 scripts folder
+set $i3script ~/.scripts/i3cmds
+
+
+################################################################################
+# => Startup
+################################################################################
+exec --no-startup-id sh ~/.scripts/fehbg.sh
+exec --no-startup-id compton -b
+exec --no-startup-id steam
+exec --no-startup-id discord
+exec --no-startup-id synology-drive
+exec --no-startup-id flameshot
+
+################################################################################
+# => Basic Bindings
+################################################################################
+bindsym $mod+Return             exec i3-sensible-terminal
+bindsym $mod+Shift+return       nop
+
+bindsym $mod+Escape             nop
+bindsym $mod+Shift+Escape       nop
+
+bindsym $mod+grave              exec --nostartup-id $i3script/dmenuunicode
+bindsym $mod+Shift+grave        nop
+
+bindsym $mod+Shift+Delete       nop
+
+bindsym $mod+Tab                workspace next_on_output
+bindsym $mod+Shift+Tab          workspace prev_on_output
+
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+# Show selections:
+bindsym $mod+Insert             exec --no-startup-id $i3script/showclip
+bindsym $mod+Pause              exec --no-startup-id xcqr
+
+# use Mouse+$mod to drag floating window
+floating_modifier $mod 
+
+
+################################################################################
+# => Letter Key Bindings
+################################################################################
+bindsym $mod+q			        [con_id="__focused__" instance="^(?!dropdowncalc|tmuxdd).*$"] kill
+bindsym $mod+Shift+q		    [con_id="__focused__" instance="^(?!dropdowncalc|tmuxdd).*$"] kill
+
+bindsym $mod+w                  nop
+bindsym $mod+Shift+w            nop
+
+bindsym $mod+e                  nop
+bindsym $mod+Shift+e            exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+bindsym $mod+r                  exec --no-startup-id $i3script/win-resize
+bindsym $mod+Shift+r            restart 
+
+bindsym $mod+t                  split toggle
+bindsym $mod+Shift+t            gaps inner current set 15; gaps outer current set 15
+
+bindsym $mod+y                  exec --no-startup-id $i3script/i3resize left
+bindsym $mod+Shift+y            nop
+
+bindsym $mod+u			        exec --no-startup-id $i3script/i3resize down 
+bindsym $mod+Shift+u		    nop
+
+bindsym $mod+i 			        exec --no-startup-id $i3script/i3resize up
+bindsym $mod+Shift+i		    nop
+
+bindsym $mod+o			        exec --no-startup-id $i3script/i3resize right
+bindsym $mod+Shift+o		    nop
+
+bindsym $mod+p			        nop
+bindsym $mod+Shift+p		    nop 
+
+bindsym $mod+a			        exec --no-startup-id $i3script/ddspawn dropdowncalc -f mono:pixelsize=24
+bindsym $mod+Shift+a		    exec $term -e pulsemixer
+
+bindsym $mod+s			        gaps inner current plus 5
+bindsym $mod+Shift+s		    gaps inner current minus 5
+
+bindsym $mod+d			        exec --no-startup-id dmenu_run -fn "Inconsolata 12" 
+# bindsym $mod+Shift+d		    reserved for launch mode
+
+set $freeze Distraction-free mode (super+shift+f to reactivate bindings)
+mode "$freeze" { bindsym $mod+Shift+f mode "default"
+}
+
+bindsym $mod+f			        fullscreen toggle
+bindsym $mod+Shift+f		    mode "$freeze"
+
+bindsym $mod+g			        workspace prev
+bindsym $mod+Shift+g		    nop
+
+bindsym $mod+h			        focus left
+bindsym $mod+Shift+h		    move left 30
+
+bindsym $mod+j			        focus down
+bindsym $mod+Shift+j		    move down 30
+
+bindsym $mod+k			        focus up
+bindsym $mod+Shift+k		    move up 30
+
+bindsym $mod+l			        focus right
+bindsym $mod+Shift+l		    move right 30
+
+bindsym $mod+z			        gaps outer current plus 5
+bindsym $mod+Shift+z		    gaps outer current minus 5
+
+bindsym $mod+x			        exec --no-startup-id lockscreen
+bindsym $mod+Shift+x		    exec --no-startup-id $i3script/prompt "Shutdown computer?" "$shutdown"
+
+#bindsym $mod+c
+bindsym $mod+Shift+c            reload 
+
+#bindsym $mod+v
+#bindsym $mod+Shift+v
+
+bindsym $mod+b			        bar mode toggle
+bindsym $mod+Shift+b		    floating toggle; sticky toggle; exec --no-startup-id $i3script/bottomleft
+
+bindsym $mod+n			        split h
+bindsym $mod+Shift+n		    floating toggle; sticky toggle; exec --no-startup-id $i3script/bottomright
+
+bindsym $mod+m 			        split v 
+bindsym $mod+Shift+m            nop
+
+
+################################################################################
+# => Arrow Keys
+################################################################################
+bindsym $mod+Left		        focus left
+bindsym $mod+Down		        focus down
+bindsym $mod+Up			        focus up
+bindsym $mod+Right 		        focus right
+bindsym $mod+Shift+Left		    move left
+bindsym $mod+Shift+Down		    move down
+bindsym $mod+Shift+Up		    move up
+bindsym $mod+Shift+Right 	    move right
+
+
+################################################################################
+# => Function Buttons
+################################################################################
+bindsym $mod+F1		[class="Firefox"] move workspace current
+bindsym $mod+F2		exec --no-startup-id $i3script/resetworkspacedisplay
+bindsym $mod+F3		exec --no-startup-id $i3script/displayselect
+bindsym $mod+F4		exec --no-startup-id $i3script/prompt "Hibernate computer?" "$hibernate"
+bindsym $mod+F5		exec --no-startup-id $netrefresh
+bindsym $mod+F6		exec --no-startup-id $term -e transmission-remote-cli
+bindsym $mod+F7		exec --no-startup-id $i3script/td-toggle
+bindsym $mod+F8		exec --no-startup-id ~/.config/mutt/etc/mailsync.sh
+bindsym $mod+F9		exec --no-startup-id $i3script/dmenumount
+bindsym $mod+F10	exec --no-startup-id $i3script/dmenuumount
+bindsym $mod+F11	exec --no-startup-id $i3script/ducksearch
+bindsym $mod+F12    exec $term -e nmtui
+
+
+################################################################################
+# => Media Keys
+################################################################################
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
+bindsym XF86AudioPlay exec /usr/bin/playerctl play-pause
+bindsym XF86AudioNext exec /usr/bin/playerctl next
+bindsym XF86AudioPrev exec /usr/bin/playerctl previous
+
+
+################################################################################
+# => Workspace Control
+################################################################################
+# monitor setup
+set $firstmonitor  DP-2      # ASUS
+set $secondmonitor DVI-D-0  # DELL
+set $TVmonitor     HDMI-0   # TV
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+set $wsTV "11"
+
+# assign workspace to monitors
+workspace $ws1 output $firstmonitor
+workspace $ws2 output $secondmonitor
+workspace $ws3 output $firstmonitor
+workspace $ws4 output $secondmonitor
+workspace $ws5 output $firstmonitor
+workspace $ws6 output $secondmonitor
+workspace $ws7 output $firstmonitor
+workspace $ws8 output $secondmonitor
+workspace $ws9 output $firstmonitor
+workspace $ws10 output $secondmonitor
+
+workspace $wsTV output $TVmonitor
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+bindsym $mod+minus workspace $wsTV
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+bindsym $mod+Shift+minus move container to workspace $wsTV
+
+# Workspace Bindings
+bindsym $mod+Home		        workspace $ws1
+bindsym $mod+Shift+Home		    move container to workspace $ws1
+bindsym $mod+End		        workspace $ws10
+bindsym $mod+Shift+End		    move container to workspace $ws10
+bindsym $mod+Prior		        workspace prev
+bindsym $mod+Shift+Prior	    move container to workspace prev
+bindsym $mod+Next		        workspace next
+bindsym $mod+Shift+Next		    move container to workspace next
+bindsym $mod+semicolon		    workspace next
+bindsym $mod+apostrophe		    split horizontal ;; exec $term
+bindsym $mod+slash		        split vertical ;; exec $term
+bindsym $mod+Shift+slash	    kill
+bindsym $mod+backslash		    workspace back_and_forth
+
+
+
+
+################################################################################
+# => Modes
+################################################################################
+set $em mode "default"
+
+# replaced with dedicated i3 reseize script
+# # resize window (you can also use the mouse for that)
+# mode "resize" {
+#     # These bindings trigger as soon as you enter the resize mode
+# 
+#     # Pressing left will shrink the window’s width.
+#     # Pressing right will grow the window’s width.
+#     # Pressing up will shrink the window’s height.
+#     # Pressing down will grow the window’s height.
+#     bindsym $left       resize shrink width 10 px or 10 ppt
+#     bindsym $down       resize grow height 10 px or 10 ppt
+#     bindsym $up         resize shrink height 10 px or 10 ppt
+#     bindsym $right      resize grow width 10 px or 10 ppt
+# 
+#     # same bindings, but for the arrow keys
+#     bindsym Left        resize shrink width 10 px or 10 ppt
+#     bindsym Down        resize grow height 10 px or 10 ppt
+#     bindsym Up          resize shrink height 10 px or 10 ppt
+#     bindsym Right       resize grow width 10 px or 10 ppt
+# 
+#     # back to normal: Enter or Escape or $mod+r
+#     bindsym Return $em
+#     bindsym Escape $em
+#     bindsym $mod+r $em
+#     bindsym $mod+Shift+r $em
+# }
+# # bindsym $mod+Shift+r mode "resize"
+
+# system control
+set $Locker "i3lock -c 000000; sleep 1"
+set $sysmenu "System: (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown"
+mode $sysmenu {
+    bindsym l       exec --no-startup-id $Locker; $em
+    bindsym e       exec --no-startup-id i3-msg exit; $em
+    bindsym s       exec --no-startup-id $Locker; exec systemctl suspend; $em
+    bindsym h       exec --no-startup-id $Locker; exec systemctl hibernate; $em
+    bindsym r       exec --no-startup-id systemctl reboot; $em
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i; $em
+
+    bindsym Return  $em
+    bindsym Escape  $em
+    bindsym $mod+Delete $em
+}
+bindsym $mod+Delete mode $sysmenu
+
+# launcher
+set $launchmenu "start: (f) firefox, (v) steam, (h) htop"
+set $lp exec --no-startup-id
+mode $launchmenu {
+    bindsym f       $lp firefox, $em
+    bindsym v       $lp steam, $em
+    bindsym h       $term -e htop
+    bindsym Return  $em
+    bindsym Escape  $em
+    bindsym $mod+Shift+d $em
+}
+bindsym $mod+Shift+d mode $launchmenu
+
+# exchange workspaces
+# work in progress
+# exchanges windows in current workspaces from workspace in 1-10
+set $exchange "Exchange workspace with workspace: (1), (2), ..., (9), (0)"
+mode $exchange {
+    bindsyt 1 rename workspace 1 to temp; rename workspace to 1
+}
+
+
+################################################################################
+# => Colors
+################################################################################
+# Set Xresources colors:
+set_from_resource $darkblack	color0  #000000
+set_from_resource $black	    color8  #000000
+set_from_resource $darkred	    color1  #000000
+set_from_resource $red		    color9  #000000
+set_from_resource $darkgreen	color2  #000000
+set_from_resource $green	    color10 #000000
+set_from_resource $darkyellow	color3  #000000
+set_from_resource $yellow	    color11 #000000
+set_from_resource $darkblue	    color4  #000000
+set_from_resource $blue		    color12 #000000
+set_from_resource $darkmagenta	color5  #000000
+set_from_resource $magenta	    color13 #000000
+set_from_resource $darkcyan	    color6  #000000
+set_from_resource $cyan		    color14 #000000
+set_from_resource $darkwhite	color7  #000000
+set_from_resource $white	    color15 #000000
+set $transparent #00000000
+
+#                       BORDER		BACKGROUND	TEXT		INDICATOR       CHILD_BORDER
+client.focused		    $red		$red		$magenta	$darkmagenta	$darkblue
+client.unfocused	    $transparent	$blue	$white		$darkblue		$darkblack
+client.focused_inactive	$transparent	$blue	$white		$darkblue		$darkblack
+client.urgent		    $darkred	$darkred	$black		$darkred		$darkred
+client.background       $black
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+    status_command 		python ~/.config/i3/i3pystat.py
+	tray_output 		primary
+	position    		top
+	workspace_buttons	yes
+	font pango:	    	Inconsolata 12		
+	colors {
+			background $darkblack
+			statusline $darkwhite
+			separator $cyan
+			focused_workspace  $blue $darkblue $darkblack
+        	active_workspace   $blue $blue $darkwhite
+      		inactive_workspace $darkblack $darkblack $white
+        	urgent_workspace   $darkblack $darkblack $white
+	}	
+}
+
+
+################################################################################
+# => Special Window Rules
+################################################################################
+# find window title with xprop$
+for_window [class="^Pavucontrol$"] floating enable
+for_window [class="^Steam$"] move container to workspace $ws9
+for_window [title="^Friends List$"] resize shrink width 200 px
+for_window [class="discord"] move container to workspace $ws8
+
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [title="Preferences$"] floating enable
+
+
+################################################################################
+# => Dropdown Windows
+################################################################################
+# tmux window for background scripts
+# mod+u
+for_window [instance="tmuxdd"] floating enable
+for_window [instance="tmuxdd"] resize set 625 450
+for_window [instance="tmuxdd"] move scratchpad
+for_window [instance="tmuxdd"] border pixel 3
+for_window [instance="tmuxdd"] sticky enable
+
+# Then I have a window running R I use for basic arithmetic
+# mod+a.
+for_window [instance="dropdowncalc"] floating enable
+for_window [instance="dropdowncalc"] resize set 800 300
+for_window [instance="dropdowncalc"] move scratchpad
+for_window [instance="dropdowncalc"] border pixel 2
+for_window [instance="dropdowncalc"] sticky enable
