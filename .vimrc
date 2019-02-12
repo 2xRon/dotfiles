@@ -112,6 +112,9 @@ set splitbelow
 
 " Remove delay leaving insert mode
 set ttimeoutlen=50
+
+" Enable mouse scroll
+:set mouse=a
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
