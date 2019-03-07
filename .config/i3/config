@@ -71,11 +71,12 @@ bindsym $mod+Pause              exec --no-startup-id xcqr
 # use Mouse+$mod to drag floating window
 floating_modifier $mod 
 
-
+# Printscreen
+bindsym Print exec flameshot gui
 ################################################################################
 # => Letter Key Bindings
 ################################################################################
-bindsym $mod+q			        [con_id="__focused__" instance="^(?!dropdowncalc|tmuxdd).*$"] kill
+bindsym $mod+q                  nop
 bindsym $mod+Shift+q		    [con_id="__focused__" instance="^(?!dropdowncalc|tmuxdd).*$"] kill
 
 bindsym $mod+w                  nop
@@ -338,7 +339,8 @@ set $lp exec --no-startup-id
 mode $launchmenu {
     bindsym f       $lp firefox, $em
     bindsym v       $lp steam, $em
-    bindsym h       $term -e htop
+    bindsym h       $term -e htop, $em
+    bindsym r       $term -e ranger, $em
     bindsym Return  $em
     bindsym Escape  $em
     bindsym $mod+Shift+d $em
