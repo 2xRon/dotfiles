@@ -191,6 +191,9 @@ endif
 " Add a bit extra margin to the left
 set foldcolumn=1
 
+" Search down into subfolders
+" Provides tab-completion for all file-related tasks
+set path+=**
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -233,7 +236,6 @@ set ffs=unix,dos,mac
 "set nobackup
 "set nowb
 "set noswapfile
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
@@ -466,6 +468,8 @@ if has("autocmd")
     autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
 endif
 
+" Copy to system clipboard with ctrl-c
+vmap <C-C> "+y
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking

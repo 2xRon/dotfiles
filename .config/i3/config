@@ -1,9 +1,9 @@
-###  _ _____ 
-### (_)___ / 
-### | | |_ \ 
+###  _ _____
+### (_)___ /
+### | | |_ \
 ### | |___) |
-### |_|____/ 
-###          
+### |_|____/
+###
 
 # Sections:
 #       -> Basic Configuration
@@ -53,7 +53,7 @@ bindsym $mod+Shift+return       nop
 bindsym $mod+Escape             nop
 bindsym $mod+Shift+Escape       nop
 
-bindsym $mod+grave              exec --nostartup-id $i3script/dmenuunicode
+bindsym $mod+grave              exec --no-startup-id $i3script/dmenuunicode
 bindsym $mod+Shift+grave        nop
 
 bindsym $mod+Shift+Delete       nop
@@ -69,10 +69,10 @@ bindsym $mod+Insert             exec --no-startup-id $i3script/showclip
 bindsym $mod+Pause              exec --no-startup-id xcqr
 
 # use Mouse+$mod to drag floating window
-floating_modifier $mod 
+floating_modifier $mod
 
 # Printscreen
-bindsym Print exec flameshot gui
+bindsym Print exec flameshot gui -p ~/Pictures/Screenshots/linux
 ################################################################################
 # => Letter Key Bindings
 ################################################################################
@@ -86,7 +86,7 @@ bindsym $mod+e                  nop
 bindsym $mod+Shift+e            exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 bindsym $mod+r                  exec --no-startup-id $i3script/win-resize
-bindsym $mod+Shift+r            restart 
+bindsym $mod+Shift+r            restart
 
 bindsym $mod+t                  split toggle
 bindsym $mod+Shift+t            gaps inner current set 15; gaps outer current set 15
@@ -94,7 +94,7 @@ bindsym $mod+Shift+t            gaps inner current set 15; gaps outer current se
 bindsym $mod+y                  exec --no-startup-id $i3script/i3resize left
 bindsym $mod+Shift+y            nop
 
-bindsym $mod+u                  exec --no-startup-id $i3script/i3resize down 
+bindsym $mod+u                  exec --no-startup-id $i3script/i3resize down
 bindsym $mod+Shift+u            nop
 
 bindsym $mod+i                  exec --no-startup-id $i3script/i3resize up
@@ -104,7 +104,7 @@ bindsym $mod+o                  exec --no-startup-id $i3script/i3resize right
 bindsym $mod+Shift+o            nop
 
 bindsym $mod+p                  nop
-bindsym $mod+Shift+p            nop 
+bindsym $mod+Shift+p            nop
 
 bindsym $mod+a                  exec --no-startup-id $i3script/ddspawn dropdowncalc -f mono:pixelsize=24
 bindsym $mod+Shift+a            exec $term -e pulsemixer
@@ -112,7 +112,7 @@ bindsym $mod+Shift+a            exec $term -e pulsemixer
 bindsym $mod+s                  gaps inner current plus 5
 bindsym $mod+Shift+s            gaps inner current minus 5
 
-bindsym $mod+d                  exec --no-startup-id dmenu_run -fn "Inconsolata 12" 
+bindsym $mod+d                  exec --no-startup-id dmenu_run -fn "Inconsolata 12"
 # bindsym $mod+Shift+d          reserved for launch mode
 
 set $freeze Distraction-free mode (super+shift+f to reactivate bindings)
@@ -144,7 +144,7 @@ bindsym $mod+x                  exec --no-startup-id lockscreen
 bindsym $mod+Shift+x            exec --no-startup-id $i3script/prompt "Shutdown computer?" "$shutdown"
 
 #bindsym $mod+c
-bindsym $mod+Shift+c            reload 
+bindsym $mod+Shift+c            reload
 
 #bindsym $mod+v
 #bindsym $mod+Shift+v
@@ -155,7 +155,7 @@ bindsym $mod+Shift+b            floating toggle; sticky toggle; exec --no-startu
 bindsym $mod+n                  split h
 bindsym $mod+Shift+n            floating toggle; sticky toggle; exec --no-startup-id $i3script/bottomright
 
-bindsym $mod+m                  split v 
+bindsym $mod+m                  split v
 bindsym $mod+Shift+m            nop
 
 
@@ -292,7 +292,7 @@ set $em mode "default"
 # # resize window (you can also use the mouse for that)
 # mode "resize" {
 #     # These bindings trigger as soon as you enter the resize mode
-# 
+#
 #     # Pressing left will shrink the window’s width.
 #     # Pressing right will grow the window’s width.
 #     # Pressing up will shrink the window’s height.
@@ -301,13 +301,13 @@ set $em mode "default"
 #     bindsym $down       resize grow height 10 px or 10 ppt
 #     bindsym $up         resize shrink height 10 px or 10 ppt
 #     bindsym $right      resize grow width 10 px or 10 ppt
-# 
+#
 #     # same bindings, but for the arrow keys
 #     bindsym Left        resize shrink width 10 px or 10 ppt
 #     bindsym Down        resize grow height 10 px or 10 ppt
 #     bindsym Up          resize shrink height 10 px or 10 ppt
 #     bindsym Right       resize grow width 10 px or 10 ppt
-# 
+#
 #     # back to normal: Enter or Escape or $mod+r
 #     bindsym Return $em
 #     bindsym Escape $em
@@ -334,7 +334,7 @@ mode $sysmenu {
 bindsym $mod+Delete mode $sysmenu
 
 # launcher
-set $launchmenu "start: (f) firefox, (v) steam, (h) htop"
+set $launchmenu "start: (f) firefox, (v) steam, (h) htop, (r) ranger"
 set $lp exec --no-startup-id
 mode $launchmenu {
     bindsym f       $lp firefox, $em
@@ -392,7 +392,7 @@ bar {
     tray_output         primary
     position            top
     workspace_buttons   yes
-    font pango:         Inconsolata 12      
+    font pango:         Inconsolata 12
     colors {
             background $darkblack
             statusline $darkwhite
@@ -401,7 +401,7 @@ bar {
             active_workspace   $blue $blue $darkwhite
             inactive_workspace $darkblack $darkblack $white
             urgent_workspace   $darkblack $darkblack $white
-    }   
+    }
 }
 
 
