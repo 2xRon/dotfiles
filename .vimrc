@@ -39,18 +39,21 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-abolish'
-Plugin 'scrooloose/nerdtree'
-Plugin 'justinmk/vim-sneak'
-Plugin 'itchyny/lightline.vim'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'sheerun/vim-polyglot'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'ggreer/the_silver_searcher'
+Plugin 'itchyny/lightline.vim'
+Plugin 'justinmk/vim-sneak'
+Plugin 'lervag/vimtex'
+Plugin 'mileszs/ack.vim'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'scrooloose/nerdtree'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'tpope/vim-abolish'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-obsession'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'vim-syntastic/syntastic'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -81,6 +84,18 @@ filetype plugin indent on    " required
 " let g:syntastic_check_on_open = 1
 " let g:syntastic_check_on_wq = 0
 
+" The_silver_searcher/ack
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" use vimtex instead of polyglot for vim
+let g:polyglot_disabled = ['latex']
+
+" Enable YCM autocompletion with vimtex
+" see :h vimtex-complete-youcompleteme
+if !exists('g:ycm_semantic_triggers')
+    let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -115,6 +130,8 @@ set ttimeoutlen=50
 
 " Enable mouse scroll
 :set mouse=a
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -122,7 +139,7 @@ set ttimeoutlen=50
 set number relativenumber
 
 " Set 7 lines to the cursor - when moving vertically using j/k
-set so=10
+set so=7
 
 " Avoid garbled characters in Chinese language windows OS
 let $LANG='en' 
@@ -195,6 +212,8 @@ set foldcolumn=1
 " Provides tab-completion for all file-related tasks
 set path+=**
 
+" speed up scrolling
+set ttyfast
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -223,7 +242,7 @@ if has("gui_running")
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
+set encoding=UTF-8
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
@@ -272,10 +291,6 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <c-space> ?
-
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
 
@@ -355,7 +370,8 @@ let g:lightline = {
       \ 'component_type': {
       \   'syntastic': 'error',
       \ },
-      \ 'subseparator': { 'left': '|', 'right': '|' }
+      \ 'separator': {'left': '', 'right': ''}, 
+      \ 'subseparator': { 'left': '', 'right': '' }
       \ }
 
 function! LightLineModified()
@@ -442,18 +458,12 @@ let g:vimshell_force_overwrite_statusline = 0
 " Remap VIM 0 to first non-blank character
 " map 0 ^
 
-" Move a line of text using ALT+[jk] or Command+[jk] on mac
+" Move a line of text using ALT+[jk] 
 " nmap <M-j> mz:m+<cr>`z
 " nmap <M-k> mz:m-2<cr>`z
 " vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 " vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
-" 
-" if has("mac") || has("macunix")
-"   nmap <D-j> <M-j>
-"   nmap <D-k> <M-k>
-"   vmap <D-j> <M-j>
-"   vmap <D-k> <M-k>
-" endif
+
 
 " Delete trailing white space on save, useful for some filetypes ;)
 fun! CleanExtraSpaces()
@@ -468,8 +478,6 @@ if has("autocmd")
     autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
 endif
 
-" Copy to system clipboard with ctrl-c
-vmap <C-C> "+y
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
@@ -499,6 +507,8 @@ map <leader>x :e ~/buffer.md<cr>
 " Toggle paste mode on and off
 map <leader>pp :togglepaste
 
+" Copy to system clipboard with ctrl-c
+vmap <C-C> "+y
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions

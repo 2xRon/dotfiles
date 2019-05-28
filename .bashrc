@@ -97,9 +97,12 @@ alias :x=' exit'
 alias cd..='cd ..'
 
 # add scripts to path
-export PATH=$PATH:/home/txron/.scripts:/home/txron/.scripts/i3cmds
+export PATH=$PATH:/home/txron/.scripts:/home/txron/.scripts/i3cmds:$(ruby -e 'puts Gem.user_dir')/bin
 
 # add slashes after symlinks from tab-completion
 bind 'set mark-symlinked-directories on'
 
+# fzf fuzzy finder
+source /usr/share/fzf/key-bindings.bash
+source /usr/share/fzf/completion.bash
 
