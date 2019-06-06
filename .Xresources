@@ -30,7 +30,7 @@ URxvt.matcher.button:	1
 !Inconsolata
 URxvt.xftAntialias:     true
 ! *font:             xft:inconsolata-12:antialias=true:hinting=true, xft:Noto Color Emoji,xft:Dejavu Sans Mono
-*font:  xft:Inconsolata Nerd Font Mono:size=12, xft:DejaVu Sans:size=12            
+*font:  xft:FantasqueSansMono Nerd Font Mono:size=12, xft:Inconsolata Nerd Font Mono:size=12, xft:DejaVu Sans:size=12            
 
 ! hard contrast: *background: #1d2021
 ! *background: #282828
