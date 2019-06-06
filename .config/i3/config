@@ -31,7 +31,7 @@ gaps outer 1
 set $term exec --no-startup-id urxvt
 
 # i3 scripts folder
-set $i3script ~/.local/bin
+set $i3script ~/.local/bin/i3cmds
 
 
 ################################################################################
