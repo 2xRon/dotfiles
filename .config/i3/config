@@ -37,7 +37,7 @@ set $i3script ~/.local/bin/i3cmds
 ################################################################################
 # => Startup
 ################################################################################
-exec --no-startup-id sh $i3script/misc/fehbg.sh
+exec --no-startup-id sh ~/.local/bin/misc/fehbg.sh
 exec --no-startup-id compton -b
 exec --no-startup-id steam
 exec --no-startup-id discord
@@ -72,7 +72,7 @@ bindsym $mod+Pause              exec --no-startup-id xcqr
 floating_modifier $mod
 
 # Printscreen
-bindsym Print exec flameshot gui -p ~/Pictures/Screenshots/linux
+bindsym Print exec flameshot gui -p ~/pictures/Screenshots/linux
 ################################################################################
 # => Letter Key Bindings
 ################################################################################
@@ -393,7 +393,7 @@ bar {
     tray_output         primary
     position            top
     workspace_buttons   yes
-    font pango:         Inconsolata 12
+    font pango:         FantasqueSansMono Nerd Font Mono
     colors {
             background $darkblack
             statusline $darkwhite
