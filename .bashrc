@@ -22,6 +22,13 @@ else
   PS1='\[\e[34m\]\u\[\e[1;32m\]@\[\e[0;33m\]\h\[\e[35m\]:\[\e[m\]\w\[\e[1;30m\]$(__git_ps1)\[\e[1;31m\]> \[\e[0m\]'
 fi
 
+# set vim mode
+set -o vi
+set show-mode-in-prompt on
+
+set vi-ins-mode-string "\e[42m\e[30m INS \e[0m\e[32m\e[0m" 
+set vi-cmd-mode-string "\e[43m\e[30m CMD \e[0m\e[33m\e[0m"
+
 # System Maintainence
 alias mw="~/.config/mutt/mutt-wizard.sh"
 alias muttwizard="~/.config/mutt/mutt-wizard.sh"
@@ -77,6 +84,7 @@ alias chgrp='chgrp --preserve-root'
 # useful bash cmds
 shdl() { curl -O $(curl -s http://sci-hub.tw/"$@" | grep location.href | grep -o http.*pdf) ;}
 vf() { $EDITOR $(fzf) ;}
+fif() { rg --files-with-matches --no-messages $1 | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 $1 || rg --ignore-case --pretty --context 10 $1 {}" ;}
 
 ## New commands
 alias da='date "+%A, %B %d, %Y [%T]"'
@@ -108,3 +116,4 @@ bind 'set mark-symlinked-directories on'
 source /usr/share/fzf/key-bindings.bash
 source /usr/share/fzf/completion.bash
 
+# vim: ft=sh ts=4 et sw=4:
