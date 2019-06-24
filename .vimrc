@@ -5,30 +5,9 @@
 "   \_/ |_|_| |_| |_|_|  \___|
 
 
-
-" Sections:
-"    -> Vundle config
-"    -> Plugin settings
-"    -> General
-"    -> VIM user interface
-"    -> Colors and Fonts
-"    -> Files and backups
-"    -> Text, tab and indent related
-"    -> Visual mode related
-"    -> Moving around, tabs and buffers
-"    -> Lightline
-"    -> Editing mappings
-"    -> vimgrep searching and cope displaying
-"    -> Spell checking
-"    -> Misc
-"    -> Helper functions
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vundle Settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 
+" {{{ Plugin Management - Vundle
+"""""""""""""""""""""
+ 
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -71,9 +50,11 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugin Settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" }}}
+
+" {{{ Plugin Settings
+"""""""""""""""""""""
+
 " syntastic
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
@@ -97,9 +78,11 @@ if !exists('g:ycm_semantic_triggers')
 endif
 let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" }}}
+
+" {{{ General
+""""""""""""""
+
 " Sets how many lines of history VIM has to remember
 set history=500
 
@@ -132,13 +115,15 @@ set ttimeoutlen=50
 :set mouse=a
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => VIM user interface
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" }}}
+
+" {{{ VIM user interface
+""""""""""""""""""""""""
+
 " line numbers and relative line numbers
 set number relativenumber
 
-" Set 7 lines to the cursor - when moving vertically using j/k
+" scroll offset - when moving vertically using j/k
 set so=7
 
 " Avoid garbled characters in Chinese language windows OS
@@ -215,9 +200,11 @@ set path+=**
 " speed up scrolling
 set ttyfast
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Colors and Fonts
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" }}}
+
+" {{{ Colors and Fonts
+""""""""""""""""""""""
+
 " Enable syntax highlighting
 syntax enable 
 
@@ -248,17 +235,21 @@ set encoding=UTF-8
 set ffs=unix,dos,mac
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Files, backups and undo
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" }}}
+
+" {{{ Files, backups and undo
+"""""""""""""""""""""""""""""
+
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 "set nobackup
 "set nowb
 "set noswapfile
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" }}}
+
+" {{{ Text, tab and indent related
+""""""""""""""""""""""""""""""""""
+
 " Use spaces instead of tabs
 set expandtab
 
@@ -279,18 +270,22 @@ set wrap "Wrap lines
 
 " Smarter linejoins with J
 set formatoptions+=j
-""""""""""""""""""""""""""""""
-" => Visual mode related
-""""""""""""""""""""""""""""""
+" }}}
+
+" {{{ Visual mode related
+"""""""""""""""""""""""""
+
 " Visual mode pressing * or # searches for the current selection
 " Super useful! From an idea by Michael Naumann
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Moving around, tabs, windows and buffers
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" }}}
+
+" {{{ Moving around, tabs, windows and buffers
+""""""""""""""""""""""""""""""""""""""""""""""
+
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
 
@@ -340,9 +335,11 @@ endtry
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 
-""""""""""""""""""""""""""""""
-" => Lightline
-""""""""""""""""""""""""""""""
+" }}}
+
+" {{{ Lightline
+"""""""""""""""
+
 " show status line
 set laststatus=2
 
@@ -452,9 +449,11 @@ let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Editing mappings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" }}}
+
+" {{{ Editing mappings
+""""""""""""""""""""""
+
 " Remap VIM 0 to first non-blank character
 " map 0 ^
 
@@ -479,9 +478,11 @@ if has("autocmd")
 endif
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Spell checking
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" }}}
+
+" {{{ Spell checking
+""""""""""""""""""""
+
 " Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
@@ -492,9 +493,11 @@ map <leader>sa zg
 map <leader>s? z=
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Misc
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" }}}
+
+" {{{ Misc
+""""""""""
+
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
@@ -510,9 +513,11 @@ map <leader>pp :togglepaste
 " Copy to system clipboard with ctrl-c
 vmap <C-C> "+y
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Helper functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" }}}
+
+" {{{ Helper functions
+""""""""""""""""""""""
+
 " Returns true if paste mode is enabled
 function! HasPaste()
     if &paste
@@ -563,3 +568,6 @@ function! VisualSelection(direction, extra_filter) range
     let @" = l:saved_reg
 endfunction
 
+" }}}
+
+" vim:fileencoding=utf-8:foldmethod=marker
