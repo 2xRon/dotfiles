@@ -28,7 +28,7 @@ set $mod Mod4
 for_window [class="^.*"] border pixel 2
 gaps inner 10
 gaps outer 1
-set $term exec --no-startup-id urxvt
+set $term exec --no-startup-id kitty
 
 # i3 scripts folder
 set $i3script ~/.local/bin/i3cmds
@@ -47,7 +47,7 @@ exec --no-startup-id flameshot
 ################################################################################
 # => Basic Bindings
 ################################################################################
-bindsym $mod+Return             exec i3-sensible-terminal
+bindsym $mod+Return             exec kitty
 bindsym $mod+Shift+return       nop
 
 bindsym $mod+Escape             nop
