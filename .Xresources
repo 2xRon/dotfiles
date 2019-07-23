@@ -9,11 +9,17 @@ URxvt.iso14755: false
 URxvt.iso14755_52: false
 
 
-!! Fonts
-#define font1         FantasqueSansMono
+/* !! Fonts */
+#define font1         FantasqueSansMono Nerd Font
 #define font2         FantasqueSansMono Nerd Font
 #define font3         DejaVu Sans Mono Nerd Font
 #define font4         Noto Sans Mono CJK JP
+
+! /* #define font1           Sans */
+! /* #define font2           Sans */
+! /* #define font3           Sans */
+! /* #define font4           Sans */
+
 
 URxvt.xftAntialias:     true
 URxvt*letterSpace: 0

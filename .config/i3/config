@@ -47,7 +47,7 @@ exec --no-startup-id flameshot
 ################################################################################
 # => Basic Bindings
 ################################################################################
-bindsym $mod+Return             exec kitty
+bindsym $mod+Return             exec kitty --single-instance
 bindsym $mod+Shift+return       nop
 
 bindsym $mod+Escape             nop
