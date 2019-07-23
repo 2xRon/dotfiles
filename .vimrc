@@ -78,6 +78,9 @@ if !exists('g:ycm_semantic_triggers')
 endif
 let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
 
+" open NERDTree 
+nmap <leader>o :NERDTreeToggle<CR>
+
 "" }}}
 
 " {{{ General
@@ -200,6 +203,7 @@ set path+=**
 " speed up scrolling
 set ttyfast
 
+
 "" }}}
 
 " {{{ Colors and Fonts
@@ -244,6 +248,24 @@ set ffs=unix,dos,mac
 "set nobackup
 "set nowb
 "set noswapfile
+
+" Persistent undo                                                           
+if has('persistent_undo')
+  " Just make sure you don't run 'sudo vim' right out of the gate and make
+  " ~/.vim/undos owned by root.root
+  let undo_base = expand("~/.vim/undos")
+  if !isdirectory(undo_base)
+    call mkdir(undo_base)
+  endif
+  let undodir = expand("~/.vim/undos/$USER")
+  if !isdirectory(undodir)
+    call mkdir(undodir)
+  endif
+  set undodir=~/.vim/undos/$USER/
+  set undofile
+endif
+
+
 
 "" }}}
 
@@ -454,15 +476,11 @@ let g:vimshell_force_overwrite_statusline = 0
 " {{{ Editing mappings
 """"""""""""""""""""""
 
-" Remap VIM 0 to first non-blank character
-" map 0 ^
-
-" Move a line of text using ALT+[jk] 
-" nmap <M-j> mz:m+<cr>`z
-" nmap <M-k> mz:m-2<cr>`z
-" vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-" vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
-
+" move groups of lines up and down with <leader><Up/Down>, all changes in single undo record
+nnoremap <silent> <leader><Down> :<C-u>call <SID>Undojoin()<CR>:<C-u>move +1<CR>==:<C-u>call <SID>SetUndojoinFlag('n')<CR>
+nnoremap <silent> <leader><Up>   :<C-u>call <SID>Undojoin()<CR>:<C-u>move -2<CR>==:<C-u>call <SID>SetUndojoinFlag('n')<CR>
+xnoremap <silent> <leader><Down> :<C-u>call <SID>Undojoin()<CR>:<C-u>'<,'>move '>+1<CR>gv=:<C-u>call <SID>SetUndojoinFlag('v')<CR>gv
+xnoremap <silent> <leader><Up>   :<C-u>call <SID>Undojoin()<CR>:<C-u>'<,'>move '<-2<CR>gv=:<C-u>call <SID>SetUndojoinFlag('v')<CR>gv
 
 " Delete trailing white space on save, useful for some filetypes ;)
 fun! CleanExtraSpaces()
@@ -495,25 +513,6 @@ map <leader>s? z=
 
 "" }}}
 
-" {{{ Misc
-""""""""""
-
-" Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-
-" Quickly open a buffer for scribble
-map <leader>q :e ~/buffer<cr>
-
-" Quickly open a markdown buffer for scribble
-map <leader>x :e ~/buffer.md<cr>
-
-" Toggle paste mode on and off
-map <leader>pp :togglepaste
-
-" Copy to system clipboard with ctrl-c
-vmap <C-C> "+y
-
-"" }}}
 
 " {{{ Helper functions
 """"""""""""""""""""""
@@ -566,6 +565,23 @@ function! VisualSelection(direction, extra_filter) range
 
     let @/ = l:pattern
     let @" = l:saved_reg
+endfunction
+
+function! s:SetUndojoinFlag(mode)
+    augroup undojoin_flag
+        autocmd!
+        if a:mode ==# 'v'
+            autocmd CursorMoved * autocmd undojoin_flag CursorMoved * autocmd! undojoin_flag
+        else
+            autocmd CursorMoved * autocmd! undojoin_flag
+        endif
+    augroup END
+endfunction
+
+function! s:Undojoin()
+    if exists('#undojoin_flag#CursorMoved')
+        silent! undojoin
+    endif
 endfunction
 
 " }}}
