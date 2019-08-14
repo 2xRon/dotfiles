@@ -19,7 +19,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'itchyny/lightline.vim'
+ Plugin 'itchyny/lightline.vim'
 Plugin 'justinmk/vim-sneak'
 Plugin 'lervag/vimtex'
 Plugin 'mileszs/ack.vim'
@@ -33,6 +33,8 @@ Plugin 'tpope/vim-obsession'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-syntastic/syntastic'
+Plugin 'wellle/targets.vim'
+Plugin 'godlygeek/tabular'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -78,8 +80,6 @@ if !exists('g:ycm_semantic_triggers')
 endif
 let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
 
-" open NERDTree 
-nmap <leader>o :NERDTreeToggle<CR>
 
 "" }}}
 
@@ -117,6 +117,8 @@ set ttimeoutlen=50
 " Enable mouse scroll
 :set mouse=a
 
+" open NERDTree 
+nmap <leader>o :NERDTreeToggle<CR>
 
 "" }}}
 
@@ -128,12 +130,6 @@ set number relativenumber
 
 " scroll offset - when moving vertically using j/k
 set so=7
-
-" Avoid garbled characters in Chinese language windows OS
-let $LANG='en' 
-set langmenu=en
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
 
 " Turn on the Wild menu
 set wildmenu
@@ -188,11 +184,6 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" Properly disable sound on errors on MacVim
-if has("gui_macvim")
-    autocmd GUIEnter * set vb t_vb=
-endif
-
 " Add a bit extra margin to the left
 set foldcolumn=1
 
@@ -211,11 +202,6 @@ set ttyfast
 
 " Enable syntax highlighting
 syntax enable 
-
-" Enable 256 colors palette in Gnome Terminal
-if $COLORTERM == 'gnome-terminal'
-    set t_Co=256
-endif
 
 try
     colorscheme desert
@@ -281,10 +267,6 @@ set smarttab
 " 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
-
-" Linebreak on 500 characters
-set lbr
-set tw=500
 
 set ai "Auto indent
 set si "Smart indent
@@ -361,8 +343,6 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 
 " {{{ Lightline
 """""""""""""""
-
-" show status line
 set laststatus=2
 
 " remove mode information duplicated by lightline
@@ -417,7 +397,7 @@ endfunction
 function! LightLineFugitive()
   try
     if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
-      let mark = ''  " edit here for cool mark
+      let mark = ' '  " edit here for cool mark
       let _ = fugitive#head()
       return strlen(_) ? mark._ : ''
     endif
@@ -458,6 +438,7 @@ function! TagbarStatusFunc(current, sort, fname, ...) abort
   return lightline#statusline(0)
 endfunction
 
+" Run Syntastic on save
 augroup AutoSyntastic
   autocmd!
   autocmd BufWritePost *.c,*.cpp,*.py call s:syntastic()
@@ -512,7 +493,6 @@ map <leader>s? z=
 
 
 "" }}}
-
 
 " {{{ Helper functions
 """"""""""""""""""""""
