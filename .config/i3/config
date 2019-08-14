@@ -37,12 +37,13 @@ set $i3script ~/.local/bin/i3cmds
 ################################################################################
 # => Startup
 ################################################################################
-exec --no-startup-id sh ~/.local/bin/misc/fehbg.sh
-exec --no-startup-id compton -b
-exec --no-startup-id steam
-exec --no-startup-id discord
-exec --no-startup-id synology-drive
-exec --no-startup-id flameshot
+exec_always --no-startup-id sh ~/.config/polybar/launch.sh
+exec        --no-startup-id sh ~/.local/bin/misc/fehbg.sh
+exec        --no-startup-id compton -b
+exec        --no-startup-id steam
+exec        --no-startup-id discord
+exec        --no-startup-id synology-drive
+exec        --no-startup-id flameshot
 
 ################################################################################
 # => Basic Bindings
@@ -388,22 +389,22 @@ client.background       $black
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-    status_command      python ~/.config/i3/i3pystat.py
-    tray_output         primary
-    position            top
-    workspace_buttons   yes
-    font pango:         FantasqueSansMono Nerd Font Mono
-    colors {
-            background $darkblack
-            statusline $darkwhite
-            separator $cyan
-            focused_workspace  $blue $darkblue $darkblack
-            active_workspace   $blue $blue $darkwhite
-            inactive_workspace $darkblack $darkblack $white
-            urgent_workspace   $darkblack $darkblack $white
-    }
-}
+# bar {
+#     status_command      python ~/.config/i3/i3pystat.py
+#     tray_output         primary
+#     position            top
+#     workspace_buttons   yes
+#     font pango:         FantasqueSansMono Nerd Font Mono
+#     colors {
+#             background $darkblack
+#             statusline $darkwhite
+#             separator $cyan
+#             focused_workspace  $blue $darkblue $darkblack
+#             active_workspace   $blue $blue $darkwhite
+#             inactive_workspace $darkblack $darkblack $white
+#             urgent_workspace   $darkblack $darkblack $white
+#     }
+# }
 
 
 ################################################################################
