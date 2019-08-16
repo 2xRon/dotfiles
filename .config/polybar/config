@@ -1,9 +1,7 @@
-# POLYBAR ]
-
+; POLYBAR 
 
 include-file = ~/.config/polybar/colors.ini
 include-file = ~/.config/polybar/modules.ini
-
 
 [variables]
 mpadding = 1
@@ -12,8 +10,8 @@ margin   = 3
 [bar/top]
 monitor        = ${env:POLY_MONITOR:}
 monitor-strict = true
-background     = ${colors.xbg}
-foreground     = ${colors.xfg}
+background     = ${colors.background}
+foreground     = ${colors.foreground}
 bottom         = false
 
 width  = 100%
@@ -22,7 +20,7 @@ height = 25
 dim-value = 1.0
 
 border-top-size    = 0
-border-bottom-size = 5
+border-bottom-size = 3
 border-right-size  = 0
 border-left-size   = 0
 
@@ -35,27 +33,25 @@ fixed-center        = true
 spacing             = 0
 padding-left        = 0
 padding-right       = 0
-module-margin-left  = 0
-module-margin-right = 0
+module-margin       = 1
 
 modules-left    = i3
-modules-center  = mpd date
-modules-right   = pulseaudio
+modules-center  = mpd 
+modules-right   = keyboard pulseaudio weather gmail date
 overline-size   = 6
-overline-color  = ${colors.xbg}
-underline-size  = 3
-underline-color = ${colors.xbg}
+overline-color  = ${colors.background}
+underline-size  = 2
+underline-color = ${colors.background}
 
-# tray-maxsize  = 32
-# tray-padding  = 5
-# tray-position = left
-# tray-detached = false
+; tray-maxsize  = 32
+; tray-padding  = 5
+; tray-position = right
+; tray-detached = false
 
 enable-ipc   = true
-border-color = ${colors.xbg}
+border-color = ${colors.background}
 
 cursor-click    = pointer
-# cursor-scroll = ns-resize
 scroll-down     = i3wm-wsnext
 scroll-up       = i3wm-wsprev
 
@@ -86,4 +82,4 @@ margin-top    = 0
 margin-bottom = 1
 
 
-; vim ft=dosini
+; vim: ft=dosini:fdm=syntax
