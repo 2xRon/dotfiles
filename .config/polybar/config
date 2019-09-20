@@ -37,16 +37,16 @@ module-margin       = 1
 
 modules-left    = i3
 modules-center  = mpd 
-modules-right   = keyboard pulseaudio weather gmail date
+modules-right   = pulseaudio weather gmail date
 overline-size   = 6
 overline-color  = ${colors.background}
 underline-size  = 2
 underline-color = ${colors.background}
 
-; tray-maxsize  = 32
-; tray-padding  = 5
-; tray-position = right
-; tray-detached = false
+tray-maxsize  = 32
+tray-padding  = 5
+tray-position = right
+tray-detached = false
 
 enable-ipc   = true
 border-color = ${colors.background}

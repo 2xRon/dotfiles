@@ -37,13 +37,13 @@ set $i3script ~/.local/bin/i3cmds
 ################################################################################
 # => Startup
 ################################################################################
-exec_always --no-startup-id sh ~/.config/polybar/launch.sh
 exec        --no-startup-id sh ~/.local/bin/misc/fehbg.sh
 exec        --no-startup-id compton -b
 exec        --no-startup-id steam
 exec        --no-startup-id discord
 exec        --no-startup-id synology-drive
 exec        --no-startup-id flameshot
+exec_always --no-startup-id sh ~/.config/polybar/launch.sh
 
 ################################################################################
 # => Basic Bindings

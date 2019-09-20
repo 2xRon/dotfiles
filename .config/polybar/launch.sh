@@ -12,7 +12,9 @@ if type "xrandr"; then
     POLY_MONITOR=$m polybar --reload top &
   done
 else
-  polybar --reload example &
+  polybar --reload top &
 fi
 
 echo "Bars launched..."
+
+#vim: ft=bash:ts=2

@@ -9,7 +9,7 @@ import os
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 def main():
-    zip_code = "Hempstead, US"
+    zip_code = "Queens County, US"
     with open(dir_path+"/weather.API_KEY") as api_file:
         api_key = api_file.read().strip()
 

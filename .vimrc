@@ -463,6 +463,9 @@ nnoremap <silent> <leader><Up>   :<C-u>call <SID>Undojoin()<CR>:<C-u>move -2<CR>
 xnoremap <silent> <leader><Down> :<C-u>call <SID>Undojoin()<CR>:<C-u>'<,'>move '>+1<CR>gv=:<C-u>call <SID>SetUndojoinFlag('v')<CR>gv
 xnoremap <silent> <leader><Up>   :<C-u>call <SID>Undojoin()<CR>:<C-u>'<,'>move '<-2<CR>gv=:<C-u>call <SID>SetUndojoinFlag('v')<CR>gv
 
+" replace word undercursor with contents of delete/yank register
+nnoremap <leader>rw "_diwP
+
 " Delete trailing white space on save, useful for some filetypes ;)
 fun! CleanExtraSpaces()
     let save_cursor = getpos(".")
