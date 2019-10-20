@@ -9,42 +9,44 @@ import os
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 def main():
-    zip_code = "Queens County, US"
-    with open(dir_path+"/weather.API_KEY") as api_file:
-        api_key = api_file.read().strip()
+    lat = 40.659478
+    long = -73.606784
+    api_key = open(dir_path+"/weather.API_KEY").read().strip()
 
     try:
-        data = urllib.parse.urlencode(
-            {"q": zip_code, "appid": api_key, "units": "imperial"}
-        )
         weather = json.loads(
             urllib.request.urlopen(
-                "http://api.openweathermap.org/data/2.5/weather?" + data
+               f"https://api.darksky.net/forecast/{api_key}/{lat},{long}"
             ).read()
-        )
-        desc = weather["weather"][0]["description"].capitalize()
-        icon_key = weather["weather"][0]["main"].capitalize()
+        )["currently"]
+        desc = weather["summary"]
+        humid = int(100*weather["humidity"])
+        temp = int(weather["temperature"])
         icons = {
-            "Thunderstorm": "",
-            "Drizzle": "",
-            "Rain": "",
-            "Snow": "",
-            "Mist": "",
-            "Smoke": "",
-            "Haze": "",
-            "Dust": "",
-            "Fog": "",
-            "Sand": "",
-            "Dust": "",
-            "Ash": "",
-            "Squall": "",
-            "Tornado": "",
-            "Clear": "",
-            "Clouds": "",
+            "clear-day":"",
+            "clear-night":"",
+            "partly-cloudy-day":"杖",
+            "partly-cloudy-night":"",
+            "cloudy":"",
+            "rain":"",
+            "showers-day":"",
+            "showers-night":"",
+            "sleet":"",
+            "rain-snow":"",
+            "rain-snow-showers-day":"ﭽ",
+            "rain-snow-showers-night":"ﭽ",
+            "snow":"",
+            "snow-showers-day":"",
+            "snow-showers-night":"",
+            "wind":"",
+            "fog":"",
+            "thunder":"",
+            "thunder-rain":"",
+            "thunder-showers-day":"",
+            "thunder-showers-night":"",
+            "hail":"晴",
         }
-        icon = icons.get(icon_key, "")
-        temp = int(weather["main"]["temp"])
-        humid = int(weather["main"]["humidity"])
+        icon = icons.get(weather["icon"].lower(), f"[{weather['icon']}]")
         return f"{icon} {desc} {humid} {temp}°F"
     except Exception as e:
         return "" + str(e)
