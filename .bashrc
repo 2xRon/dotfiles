@@ -106,7 +106,6 @@ alias cd..='cd ..'
 
 # add scripts to path
 export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:$(du $HOME/.local/bin/ | cut -f2 | tr '\n' ':')
 export PATH=$PATH:$(ruby -e 'puts Gem.user_dir')/bin
 
 # add slashes after symlinks from tab-completion

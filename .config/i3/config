@@ -31,13 +31,13 @@ gaps outer 1
 set $term exec --no-startup-id kitty
 
 # i3 scripts folder
-set $i3script ~/.local/bin/i3cmds
+set $i3script ~/.local/bin
 
 
 ################################################################################
 # => Startup
 ################################################################################
-exec        --no-startup-id sh ~/.local/bin/misc/fehbg.sh
+exec        --no-startup-id sh $i3script/fehbg.sh
 exec        --no-startup-id compton -b
 exec        --no-startup-id steam
 exec        --no-startup-id discord
