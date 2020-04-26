@@ -37,7 +37,8 @@ module-margin       = 1
 
 modules-left    = i3
 modules-center  = mpd 
-modules-right   = pulseaudio weather gmail date
+; modules-right   = pulseaudio weather gmail date
+modules-right = pulseaudio weather date
 overline-size   = 6
 overline-color  = ${colors.background}
 underline-size  = 2

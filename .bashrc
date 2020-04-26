@@ -97,6 +97,7 @@ alias ..='cd ..'
 # ENV Vars
 export TERMINAL="urxvt"
 export BROWSER="firefox"
+export BC_ENV_ARGS=-lq
 
 ## Make Bash error tolerant
 alias :q=' exit'

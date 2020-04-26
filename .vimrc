@@ -19,7 +19,8 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'Valloric/YouCompleteMe'
- Plugin 'itchyny/lightline.vim'
+
+Plugin 'itchyny/lightline.vim'
 Plugin 'justinmk/vim-sneak'
 Plugin 'lervag/vimtex'
 Plugin 'mileszs/ack.vim'
@@ -32,6 +33,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-obsession'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-unimpaired'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'wellle/targets.vim'
 Plugin 'godlygeek/tabular'
@@ -72,6 +75,9 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " use vimtex instead of polyglot for vim
 let g:polyglot_disabled = ['latex']
+
+" set zathura viewer for tex preview
+let g:vimtex_view_general_viewer = 'zathura'
 
 " Enable YCM autocompletion with vimtex
 " see :h vimtex-complete-youcompleteme
@@ -204,7 +210,7 @@ set ttyfast
 syntax enable 
 
 try
-    colorscheme desert
+    colorscheme elflord
 catch
 endtry
 
@@ -227,7 +233,7 @@ set ffs=unix,dos,mac
 
 "" }}}
 
-" {{{ Files, backups and undo
+" {{{ Files, filetype rules, backups and undo
 """""""""""""""""""""""""""""
 
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
@@ -252,6 +258,12 @@ if has('persistent_undo')
 endif
 
 
+" set python formatter
+augroup black-fmt
+    autocmd!
+    autocmd FileType *.py setlocal formatprg=black\ --quiet\ -
+    " autocmd BufWritePre *.py :normal gggqG``
+augroup END
 
 "" }}}
 
@@ -479,6 +491,8 @@ if has("autocmd")
     autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
 endif
 
+" fewer keys to reformat file
+nnoremap <leader>gq gggqG``
 
 "" }}}
 

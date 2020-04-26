@@ -73,7 +73,7 @@ bindsym $mod+Pause              exec --no-startup-id xcqr
 floating_modifier $mod
 
 # Printscreen
-bindsym Print exec flameshot gui -p ~/pictures/Screenshots/linux
+bindsym Print exec flameshot gui -p ~/pictures/Screenshots/input_dir && python ~/pictures/Screenshots/organize.py
 ################################################################################
 # => Letter Key Bindings
 ################################################################################
@@ -335,11 +335,12 @@ mode $sysmenu {
 bindsym $mod+Delete mode $sysmenu
 
 # launcher
-set $launchmenu "start: (f) firefox, (v) steam, (h) htop, (r) ranger, (n) nemo"
+set $launchmenu "start: (f) firefox, (v) vim, (g) steam, (h) htop, (r) ranger, (n) nemo"
 set $lp exec --no-startup-id
 mode $launchmenu {
     bindsym f       $lp firefox, $em
-    bindsym v       $lp steam, $em
+    bindsym g       $lp steam, $em
+    bindsym v       $term -e vim, $em
     bindsym h       $term -e htop, $em
     bindsym r       $term -e ranger, $em
     bindsym n       exec --no-startup-id nemo, $em
@@ -416,6 +417,9 @@ for_window [class="^Steam$"] move container to workspace $ws9
 for_window [title="^Friends List$"] resize shrink width 200 px
 for_window [class="discord"] move container to workspace $ws8
 for_window [instance="origin.exe"] floating enable
+# for_window [class="Remote Desktop Connection"] floating enable
+# for_window [class="Windows sign-in"] floating enable
+# for_window [class="^Citrix"] floating enable
 
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable

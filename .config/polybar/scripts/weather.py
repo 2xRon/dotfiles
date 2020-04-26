@@ -48,6 +48,8 @@ def main():
         }
         icon = icons.get(weather["icon"].lower(), f"[{weather['icon']}]")
         return f"{icon} {desc} {humid} {temp}°F"
+    except urllib.error:
+        return "No connection"
     except Exception as e:
         return "" + str(e)
 
