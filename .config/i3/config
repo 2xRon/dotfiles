@@ -37,7 +37,7 @@ set $i3script ~/.local/bin
 ################################################################################
 # => Startup
 ################################################################################
-exec        --no-startup-id sh $i3script/fehbg.sh
+exec_always --no-startup-id sh $i3script/fehbg.sh
 exec        --no-startup-id compton -b
 exec        --no-startup-id steam
 exec        --no-startup-id discord
@@ -73,7 +73,7 @@ bindsym $mod+Pause              exec --no-startup-id xcqr
 floating_modifier $mod
 
 # Printscreen
-bindsym Print exec flameshot gui -p ~/pictures/Screenshots/input_dir && python ~/pictures/Screenshots/organize.py
+bindsym Print exec flameshot gui -p ~/pictures/screenshots/input_dir && python ~/pictures/screenshots/organize.py
 ################################################################################
 # => Letter Key Bindings
 ################################################################################
