@@ -38,6 +38,7 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'wellle/targets.vim'
 Plugin 'godlygeek/tabular'
+Plugin 'https://gitlab.com/protesilaos/tempus-themes-vim.git'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -210,7 +211,7 @@ set ttyfast
 syntax enable 
 
 try
-    colorscheme elflord
+    colorscheme tempus_future
 catch
 endtry
 
