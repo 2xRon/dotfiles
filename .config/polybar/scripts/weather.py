@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 
 import json
-import urllib
-import urllib.parse
-import urllib.request
+import requests
 import os
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -14,11 +12,11 @@ def main():
     api_key = open(dir_path+"/weather.API_KEY").read().strip()
 
     try:
-        weather = json.loads(
-            urllib.request.urlopen(
-               f"https://api.darksky.net/forecast/{api_key}/{lat},{long}"
-            ).read()
-        )["currently"]
+        response = requests.get(
+           f"https://api.darksky.net/forecast/{api_key}/{lat},{long}"
+        )
+        response.raise_for_status()
+        weather = response.json()["currently"]
         desc = weather["summary"]
         humid = int(100*weather["humidity"])
         temp = int(weather["temperature"])
@@ -48,10 +46,14 @@ def main():
         }
         icon = icons.get(weather["icon"].lower(), f"[{weather['icon']}]")
         return f"{icon} {desc} {humid} {temp}°F"
-    except urllib.error:
+    except requests.exceptions.HTTPError as errh:
+        return "HTTP Response Error"
+    except requests.exceptions.ConnectionError as errc:
         return "No connection"
-    except Exception as e:
-        return "" + str(e)
+    except requests.exceptions.Timeout as errt:
+        return "Timeout error"
+    except requests.exceptions.RequestException as err:
+        return "Other Error"
 
 
 if __name__ == "__main__":

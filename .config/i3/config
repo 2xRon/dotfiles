@@ -81,7 +81,7 @@ bindsym $mod+q                  nop
 bindsym $mod+Shift+q            [con_id="__focused__" instance="^(?!dropdowncalc|tmuxdd).*$"] kill
 
 bindsym $mod+w                  nop
-bindsym $mod+Shift+w            nop
+bindsym $mod+Shift+w            exec ~/.local/bin/stoken-copy
 
 bindsym $mod+e                  nop
 bindsym $mod+Shift+e            exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
@@ -105,7 +105,7 @@ bindsym $mod+o                  exec --no-startup-id $i3script/i3resize right
 bindsym $mod+Shift+o            nop
 
 bindsym $mod+p                  nop
-bindsym $mod+Shift+p            nop
+bindsym $mod+Shift+p            exec --no-startup-id echo R@ndb9484 | xclip -sel clip
 
 bindsym $mod+a                  exec --no-startup-id $i3script/ddspawn dropdowncalc -f mono:pixelsize=24
 bindsym $mod+Shift+a            exec $term -e pulsemixer

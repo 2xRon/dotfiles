@@ -266,6 +266,8 @@ augroup black-fmt
     " autocmd BufWritePre *.py :normal gggqG``
 augroup END
 
+" ctags on filewrite
+au BufWritePost *.c,*.cpp,*.h silent! !ctags -R &
 "" }}}
 
 " {{{ Text, tab and indent related

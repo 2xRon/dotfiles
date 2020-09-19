@@ -36,7 +36,7 @@ padding-right       = 0
 module-margin       = 1
 
 modules-left    = i3
-modules-center  = mpd 
+modules-center  = spotify
 ; modules-right   = pulseaudio weather gmail date
 modules-right = pulseaudio weather date
 overline-size   = 6
